@@ -1,35 +1,28 @@
 const sequelize = require('../database/database.js')
 const { DataTypes } = require('sequelize')
 const Post = require('./post.js')
-const User = sequelize.define('users', {
+const Animal = sequelize.define('animals', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    username: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    password: {
+    description: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    avatar: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    active: {
-        type: DataTypes.BOOLEAN,
         allowNull: false
     }
 })
-User.hasMany(Post,{
-    foreignKey:'user_id',
+Animal.hasMany(Post,{
+    foreignKey:'animal_id',
     sourceKey:'id'
 })
-Post.belongsTo(User, {
-    foreignKey: 'user_id',
+Post.belongsTo(Animal, {
+    foreignKey: 'animal_id',
     sourceKey: 'id'
 })
-module.exports = User
+
+module.exports = Animal
