@@ -17,12 +17,5 @@ const Specie = sequelize.define('species', {
     },
 })
 
-Specie.hasMany(Animal,{
-    foreignKey: 'specie_id',
-    sourceKey: 'id'
-})
-Animal.belongsTo(Specie,{
-    foreignKey:'specie_id',
-    sourceKey:'id'
-})
+
 module.exports = Specie

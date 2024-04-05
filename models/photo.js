@@ -7,18 +7,11 @@ const Photo = sequelize.define('photos', {
         autoIncrement: true,
         primaryKey: true
     },
-    photo: {
+    url: {
         type: DataTypes.STRING,
         allowNull: false
     },
 })
 
-Animal.hasMany(Photo, {
-    foreignKey: 'animal_id',
-    sourceKey: 'id'
-})
-Photo.belongsTo(Animal, {
-    foreignKey: 'animal_id',
-    sourceKey: 'id'
-})
+
 module.exports = Photo

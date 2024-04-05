@@ -11,7 +11,7 @@ const Post = sequelize.define('posts', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    photo: {
+    url: {
         type: DataTypes.STRING,
         allowNull: false
     },

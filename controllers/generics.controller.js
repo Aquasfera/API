@@ -8,7 +8,7 @@ const createItem = async (req, res, Model) => {
 }
 const readAllItems = async (req, res, Model) => {
     try {
-        const item = Model.findAll()
+        const item = await Model.findAll()
         res.json(item)
     } catch (error) {
         res.status(400).json({ error: error.message })

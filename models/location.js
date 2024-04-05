@@ -16,7 +16,5 @@ const Location = sequelize.define('locations', {
         allowNull: false
     },
 })
-Location.belongsToMany(Animal, { through: 'animal_location' })
-Animal.belongsToMany(Location, { through: 'animal_location' })
 
 module.exports = Location

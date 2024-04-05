@@ -16,13 +16,5 @@ const Animal = sequelize.define('animals', {
         allowNull: false
     }
 })
-Animal.hasMany(Post,{
-    foreignKey:'animal_id',
-    sourceKey:'id'
-})
-Post.belongsTo(Animal, {
-    foreignKey: 'animal_id',
-    sourceKey: 'id'
-})
 
 module.exports = Animal
