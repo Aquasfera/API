@@ -4,16 +4,12 @@ const Animal = require('../models/animal.js')
 const Specie = require('../models/specie.js')
 const Photo = require('../models/photo.js')
 const Location = require('../models/location.js')
-const { where } = require('sequelize')
 
 const getAllData = async (req, res) => {
     try {
         const allData = await Animal.findAll({
             include: [
-                {
-                    model: User,
-                    attributes: ['username', 'avatar']
-                }, {
+               {
                     model: Location,
                     attributes: ['name', 'description']
                 },{
@@ -23,6 +19,10 @@ const getAllData = async (req, res) => {
                 {
                     model: Photo,
                     attributes: ['url']
+                },
+                {
+                    model: Post,
+                    attributes: ['comment', 'likes','url','user_id']
                 }
 
             ],
@@ -41,10 +41,14 @@ const getAllDataById = async (req, res) => {
         const allData = await Animal.findOne({
             where: { id: req.params.id },
             include: [
-                // {
-                //     model: User,
-                //     attributes: ['username', 'avatar']
-                // },
+                //  {
+                //      model: User,
+                //      attributes: ['username', 'avatar']
+                //  },
+                 {
+                    model: Post,
+                    attributes: ['comment', 'likes','url','user_id']
+                 },
                  {
                     model: Location,
                     attributes: ['name', 'description']

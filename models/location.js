@@ -1,6 +1,5 @@
 const sequelize = require('../database/database.js')
 const { DataTypes } = require('sequelize')
-const Animal = require("./animal.js")
 const Location = sequelize.define('locations', {
     id: {
         type: DataTypes.INTEGER,

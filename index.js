@@ -30,14 +30,7 @@ async function main() {
     app.use('/api', photoRoutes)
     app.use('/api', locationRoutes)
     app.listen(PORT)
-    User.hasMany(Post, {
-        foreignKey: 'user_id',
-        sourceKey: 'id'
-    })
-    Post.belongsTo(User, {
-        foreignKey: 'user_id',
-        sourceKey: 'id'
-    })
+    
     Specie.hasMany(Animal, {
         foreignKey: 'specie_id',
         sourceKey: 'id'
@@ -56,6 +49,10 @@ async function main() {
     })
     Location.belongsToMany(Animal, { through: 'animal_location' })
     Animal.belongsToMany(Location, { through: 'animal_location' })
+
+    // Animal.belongsToMany(User, { through: Post })
+    // User.belongsToMany(Animal, { through: Post })
+    
     Animal.hasMany(Post,{
         foreignKey:'animal_id',
         sourceKey:'id'
@@ -64,7 +61,14 @@ async function main() {
         foreignKey: 'animal_id',
         sourceKey: 'id'
     })
-    
+    User.hasMany(Post, {
+        foreignKey: 'user_id',
+        sourceKey: 'id'
+    })
+    Post.belongsTo(User, {
+        foreignKey: 'user_id',
+        sourceKey: 'id'
+    })
 
     //ALTER Altera la base de datos sin borrarlos por si se cambia la estructura
     await sequelize.sync({ alter: true })
