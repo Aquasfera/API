@@ -69,7 +69,15 @@ async function main() {
         foreignKey: 'user_id',
         sourceKey: 'id'
     })
-
+    Location.hasMany(Post, {
+        foreignKey: 'location_id',
+        sourceKey: 'id'
+    })
+    Post.belongsTo(Location, {
+        foreignKey: 'location_id',
+        sourceKey: 'id'
+    })
+    
     //ALTER Altera la base de datos sin borrarlos por si se cambia la estructura
     await sequelize.sync({ alter: true })
 }

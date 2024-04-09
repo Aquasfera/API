@@ -15,10 +15,11 @@ const Post = sequelize.define('posts', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    likes:{
-        type:DataTypes.INTEGER,
-        allowNull:false
+    likes: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
+
 })
 
 module.exports = Post
