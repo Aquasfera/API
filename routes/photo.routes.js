@@ -9,12 +9,17 @@ const {
     readAllItems,
     readItem
 } = require('../controllers/generics.controller.js')
+const {
+    getAllDataByURL
+} = require('../controllers/photo.controller.js')
 const checkToken = require('../middleware/token.js')
 const resize = require('../middleware/resize.js')
 router.get('/photo', async (req, res) => await readAllItems(req, res, Photo))
 router.get('/photo/:id', async (req, res) => await readItem(req, res, Photo))
+router.get('/photo/url/:name', async (req, res) => await getAllDataByURL(req, res, Photo))
 router.post('/photo', [resize,checkToken], async (req, res) => {
     req.body.url = req.file.path
+    req.body.name = req.file.filename
     await createItem(req, res, Photo)
 })
 router.put('/photo/:id', checkToken, async (req, res) => await updateItem(req, res, Photo))

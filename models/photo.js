@@ -6,6 +6,10 @@ const Photo = sequelize.define('photos', {
         autoIncrement: true,
         primaryKey: true
     },
+    name:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     url: {
         type: DataTypes.STRING,
         allowNull: false
