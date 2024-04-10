@@ -58,7 +58,7 @@ const getAllDataById = async (req, res) => {
                 },
                 {
                     model: Photo,
-                    attributes: ['url']
+                    attributes: ['id','url']
                 }
 
             ],
@@ -105,6 +105,7 @@ const getAllDataByName = async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 }
+
 module.exports = {
     getAllData,
     getAllDataById,

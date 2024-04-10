@@ -3,7 +3,7 @@ const multer = require('multer');
 const SharpMulter = require('sharp-multer');
 
 const storage = SharpMulter({
-    destination: (req, file, callback) => callback(null, '/data/photos'),
+    destination: (req, file, callback) => callback(null, './data/photos'),
     imageOptions: {
         fileFormat: 'jpg',
         quality: 80,

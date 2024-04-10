@@ -100,9 +100,27 @@ const getPostByAnimal = async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 }
+const createPost = async (req, res) => {
+    try {
+        const { description, likes, user_id, animal_id } = req.body
+        const url = req.file.filename
+        const newItem = new Post({
+            description, likes, user_id, animal_id,
+            url
+        })
+        console.log(newItem)
+        await newItem.save()
+        res.json(newItem)
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+    
 module.exports = {
     getAllData,
     getAllDataById,
     getPostByUser,
-    getPostByAnimal
+    getPostByAnimal,
+    createPost
 }

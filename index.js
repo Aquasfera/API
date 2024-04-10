@@ -23,7 +23,7 @@ async function main() {
     app.use(express.json())
     app.use(cookieParser())
     app.use(cors({ origin: originURL, credentials: true }))
-    app.use(express.static('public'))
+    app.use(express.static('data'))
     app.use('/photos',express.static('photos'))
     app.use('/api', userRoutes)
     app.use('/api', postRoutes)
