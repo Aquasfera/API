@@ -18,11 +18,11 @@ const getAllData = async (req, res) => {
                 },
                 {
                     model: Photo,
-                    attributes: ['url']
+                    attributes: ['id','url']
                 },
                 {
                     model: Post,
-                    attributes: ['comment', 'likes','url','user_id']
+                    attributes: ['description', 'likes','url','user_id']
                 }
 
             ],
@@ -47,7 +47,7 @@ const getAllDataById = async (req, res) => {
                 //  },
                  {
                     model: Post,
-                    attributes: ['comment', 'likes','url','user_id']
+                    attributes: ['description', 'likes','url','user_id']
                  },
                  {
                     model: Location,
@@ -77,13 +77,10 @@ const getAllDataByName = async (req, res) => {
         const allData = await Animal.findOne({
             where: { name: req.params.name },
             include: [
-                //  {
-                //      model: User,
-                //      attributes: ['username', 'avatar']
-                //  },
+                
                  {
                     model: Post,
-                    attributes: ['comment', 'likes','url','user_id']
+                    attributes: ['description', 'likes','url','user_id']
                  },
                  {
                     model: Location,
@@ -101,7 +98,7 @@ const getAllDataByName = async (req, res) => {
             attributes: { exclude: ['specie_id'] }
         })
         if (!allData) {
-           return res.status(404).json({ message: "Post not found" })
+           return res.status(404).json({ message: "Animal not found" })
         }
         res.json(allData)
     } catch (error) {

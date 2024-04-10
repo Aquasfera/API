@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const sequelize = require('./database/database.js')
-
+const path = require('path')
 const User = require('./models/user.js')
 const Animal = require('./models/animal.js')
 const Specie = require('./models/specie.js')
@@ -23,6 +23,8 @@ async function main() {
     app.use(express.json())
     app.use(cookieParser())
     app.use(cors({ origin: originURL, credentials: true }))
+    app.use(express.static('public'))
+    app.use('/photos',express.static('photos'))
     app.use('/api', userRoutes)
     app.use('/api', postRoutes)
     app.use('/api', animalRoutes)
