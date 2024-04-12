@@ -29,7 +29,7 @@ const getAllData = async (req, res) => {
             attributes: { exclude: ['specie_id'] }
         })
         if(!allData){
-            return res.status(404).json({ message: "Post not found" })
+            return res.status(404).json({ message: "Animal not found" })
         }
         res.json(allData)
     } catch (error) {
@@ -65,7 +65,7 @@ const getAllDataById = async (req, res) => {
             attributes: { exclude: ['specie_id'] }
         })
         if (!allData) {
-           return res.status(404).json({ message: "Post not found" })
+           return res.status(404).json({ message: `Animal with ${req.params.id} data not found` })
         }
         res.json(allData)
     } catch (error) {
@@ -98,7 +98,7 @@ const getAllDataByName = async (req, res) => {
             attributes: { exclude: ['specie_id'] }
         })
         if (!allData) {
-           return res.status(404).json({ message: "Animal not found" })
+           return res.status(404).json({ message: `Animal with ${req.params.name} data not found` })
         }
         res.json(allData)
     } catch (error) {

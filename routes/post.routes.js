@@ -23,7 +23,7 @@ router.get('/post', async(req,res) => await getAllData(req,res))
 router.get('/post/:id', async(req,res) => await getAllDataById(req,res))
 router.get('/post/user/:id', async(req,res) => await getPostByUser(req,res))
 router.get('/post/animal/:id', async(req,res) => await getPostByAnimal(req,res))
-router.post('/post', [resize, checkToken], async(req,res) =>{
+router.post('/post', [resize], async(req,res) =>{
  
     await createPost(req,res,Post)
 })

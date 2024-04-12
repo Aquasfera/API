@@ -1,8 +1,6 @@
 const Post = require('../models/post.js')
 const User = require('../models/user.js')
 const Animal = require('../models/animal.js')
-const Specie = require('../models/specie.js')
-const Photo = require('../models/photo.js')
 const Location = require('../models/location.js')
 
 const getAllData = async (req, res) => {
@@ -16,10 +14,10 @@ const getAllData = async (req, res) => {
                     model: Animal,
                     attributes: ['name', 'description']
                 },
-                // {
-                //     model:Location,
-                //     attributes:['name']   
-                // }
+                {
+                    model:Location,
+                    attributes:['name']   
+                }
             ],
             attributes: { exclude: ['user_id', 'animal_id'] }
         })
@@ -42,12 +40,16 @@ const getAllDataById = async (req, res) => {
                 }, {
                     model: Animal,
                     attributes: ['name', 'description']
+                },
+                {
+                    model:Location,
+                    attributes:['name']   
                 }
             ],
             attributes: { exclude: ['user_id', 'animal_id','updatedAt','createdAt'] }
         })
         if (!allData) {
-           return res.status(404).json({ message: "Post not found" })
+           return res.status(404).json({ message: `Post with ${req.params.id} data not found` })
         }
         res.json(allData)
     } catch (error) {
@@ -65,12 +67,16 @@ const getPostByUser = async (req, res) => {
                 }, {
                     model: Animal,
                     attributes: ['name', 'description']
+                },
+                {
+                    model:Location,
+                    attributes:['name']   
                 }
             ],
             attributes: { exclude: ['user_id', 'animal_id','updatedAt','createdAt'] }
         })
         if (!allData) {
-           return res.status(404).json({ message: "Post not found" })
+           return res.status(404).json({ message: `Post with user_id: ${req.params.id} data not found` })
         }
         res.json(allData)
     } catch (error) {
@@ -88,12 +94,16 @@ const getPostByAnimal = async (req, res) => {
                 }, {
                     model: Animal,
                     attributes: ['name', 'description']
+                },
+                {
+                    model:Location,
+                    attributes:['name']   
                 }
             ],
             attributes: { exclude: ['user_id', 'animal_id','updatedAt','createdAt'] }
         })
         if (!allData) {
-           return res.status(404).json({ message: "Post not found" })
+           return res.status(404).json({ message: `Post by Animal with animal_id: ${req.params.id} data not found` })
         }
         res.json(allData)
     } catch (error) {
@@ -102,12 +112,17 @@ const getPostByAnimal = async (req, res) => {
 }
 const createPost = async (req, res) => {
     try {
-        const { description, likes, user_id, animal_id } = req.body
+        const { description, likes, user_id, animal_id,location_id } = req.body
         const url = req.file.filename
         const newItem = new Post({
-            description, likes, user_id, animal_id,
+            description, likes, user_id, animal_id,location_id,
             url
         })
+        if(!newItem){
+            return res.status(404).json({ message: "Post not found" })
+        }
+        
+        
         console.log(newItem)
         await newItem.save()
         res.json(newItem)

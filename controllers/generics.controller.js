@@ -21,7 +21,7 @@ const readItem = async (req, res, Model) => {
         if (item) {
             res.json(item)
         } else {
-            return res.status(404).json({ error: 'Item not found' })
+            return res.status(404).json({ error: `Item not found` })
         }
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -31,7 +31,7 @@ const updateItem = async (req, res, Model) => {
     try {
         const item = await Model.findByPk(req.params.id)
         if (!item) {
-            return res.status(404).json({ error: "Item not found" })
+            return res.status(404).json({ error: `Item not found` })
         }
         await item.update(req.body)
         res.json(item)
@@ -43,7 +43,7 @@ const deleteItem = async(req,res,Model) => {
     try{
         const item = await Model.findByPk(req.params.id)
         if(!item){
-            return res.status(404).json({error: "Item not found"})
+            return res.status(404).json({error:  `${Model} not found`})
         }
         await item.destroy()
         res.json({ message: Model + "updated succesfully"})

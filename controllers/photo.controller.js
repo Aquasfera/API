@@ -7,7 +7,7 @@ const getAllDataByURL = async (req, res) => {
             where: { name: req.params.name },
         })
         if (!allData) {
-           return res.status(404).json({ message: "Photo not found" })
+           return res.status(404).json({ message: `Photo with ${req.params.name} data not found` })
         }
         res.json(allData)
     } catch (error) {
