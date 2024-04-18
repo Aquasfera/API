@@ -36,10 +36,14 @@ const register = async (req, res, Model) => {
         const passwordEncrypt = bcrypt.hashSync(password, 10)
         password = passwordEncrypt
         const user = await Model.create({ username, password, avatar, active })
-        return res.status(200).json({ err: "user created" })
+        return res.status(200).json({ message: "user created" })
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
+}
+const logout = async (req, res) => {
+    res.clearCookie('token')
+    return res.json({ message: 'Logout' })
 }
 const checkCookie = async (req, res, Model) => {
     const user = await Model.findOne(req.userId)
@@ -52,5 +56,6 @@ const checkCookie = async (req, res, Model) => {
 module.exports = {
     login,
     register,
-    checkCookie
+    checkCookie,
+    logout
 }

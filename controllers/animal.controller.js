@@ -22,7 +22,7 @@ const getAllData = async (req, res) => {
                 },
                 {
                     model: Post,
-                    attributes: ['description', 'likes','url','user_id']
+                    attributes: ['description','url','user_id']
                 }
 
             ],
@@ -47,7 +47,7 @@ const getAllDataById = async (req, res) => {
                 //  },
                  {
                     model: Post,
-                    attributes: ['description', 'likes','url','user_id']
+                    attributes: ['description','url','user_id']
                  },
                  {
                     model: Location,
@@ -80,7 +80,7 @@ const getAllDataByName = async (req, res) => {
                 
                  {
                     model: Post,
-                    attributes: ['description', 'likes','url','user_id']
+                    attributes: ['description','url','user_id']
                  },
                  {
                     model: Location,

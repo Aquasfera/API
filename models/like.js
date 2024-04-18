@@ -1,25 +1,19 @@
 const sequelize = require('../database/database.js')
 const { DataTypes } = require('sequelize')
-
-const Post = sequelize.define('posts', {
+const Like = sequelize.define('likes', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    description: {
-        type: DataTypes.STRING,
+    userId: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
-    url: {
-        type: DataTypes.STRING,
+    postId: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
-    // likes: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false
-    // }
-
 })
 
-module.exports = Post
+module.exports = Like

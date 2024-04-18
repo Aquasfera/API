@@ -1,25 +1,21 @@
 const sequelize = require('../database/database.js')
 const { DataTypes } = require('sequelize')
 
-const Post = sequelize.define('posts', {
+const Follow = sequelize.define('follows', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    description: {
-        type: DataTypes.STRING,
+    followerId: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
-    url: {
-        type: DataTypes.STRING,
+    followedId: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
-    // likes: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false
-    // }
 
 })
 
-module.exports = Post
+module.exports = Follow

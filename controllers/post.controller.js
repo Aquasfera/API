@@ -112,17 +112,15 @@ const getPostByAnimal = async (req, res) => {
 }
 const createPost = async (req, res) => {
     try {
-        const { description, likes, user_id, animal_id,location_id } = req.body
+        const { description, user_id, animal_id,location_id } = req.body
         const url = req.file.filename
         const newItem = new Post({
-            description, likes, user_id, animal_id,location_id,
+            description, user_id, animal_id,location_id,
             url
         })
         if(!newItem){
             return res.status(404).json({ message: "Post not found" })
         }
-        
-        
         console.log(newItem)
         await newItem.save()
         res.json(newItem)

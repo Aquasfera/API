@@ -5,7 +5,7 @@ const SharpMulter = require('sharp-multer');
 const storage = SharpMulter({
     destination: (req, file, callback) => callback(null, './data/photos'),
     imageOptions: {
-        fileFormat: 'jpg',
+        fileFormat: 'webp',
         quality: 80,
         resize: {
             width: 1280, height: 720,

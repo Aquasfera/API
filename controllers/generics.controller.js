@@ -41,6 +41,7 @@ const updateItem = async (req, res, Model) => {
 }
 const deleteItem = async(req,res,Model) => {
     try{
+        console.log(Model)
         const item = await Model.findByPk(req.params.id)
         if(!item){
             return res.status(404).json({error:  `${Model} not found`})

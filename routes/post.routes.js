@@ -27,6 +27,6 @@ router.post('/post', [resize], async(req,res) =>{
  
     await createPost(req,res,Post)
 })
-router.put('/post/:id', checkToken, async(req,res) => await updateItem(req,res,Post))
+router.put('/post/:id', async(req,res) => await updateItem(req,res,Post))
 router.delete('/post/:id', checkToken, async(req,res) => await deleteItem(req,res,Post))
 module.exports = router
