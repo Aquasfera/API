@@ -7,7 +7,8 @@ const {
     getFollowersById,
     getFollowsById,
     getFollowersByIdAndFollowedId,
-    postFollower
+    postFollower,
+    deleteFollower
 } = require('../controllers/follow.controller')
 const {
     createItem,
@@ -24,6 +25,6 @@ router.get('/follow/count/follower/:followerId', async(req,res) => await getCoun
 router.get('/follow/count/followed/:followedId', async(req,res) => await getCountFromFollowedId(req,res))
 router.get('/follow/follower/:followerId/followed/:followedId', async(req,res) => await getFollowersByIdAndFollowedId(req,res))
 router.post('/follow', async(req,res) => await postFollower(req,res))
-router.put('/follow/:id', async(req,res) => await updateItem(req,res,Like))
-router.delete('/follow/:id', checkToken, async(req,res) => await deleteItem(req,res,Like))
+router.put('/follow/:id', async(req,res) => await updateItem(req,res,Follow))
+router.delete('/follow/follower/:followerId/followed/:followedId', async(req,res) => await deleteFollower(req,res))
 module.exports = router

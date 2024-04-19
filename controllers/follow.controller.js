@@ -30,7 +30,7 @@ const getFollowsById = async (req, res) => {
 }
 const getCountFromFollowersId = async (req, res) => {
     try {
-        const allData = await Follow.count({
+        const allData = await Follow.count({ 
             where: { followerId: req.params.followerId }
         })
         if (!allData) {
@@ -71,6 +71,31 @@ const getFollowersByIdAndFollowedId = async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 }
+const deleteFollower = async (req, res) => {
+    try {
+        const followerExist = await Follow.findOne({
+            where: {
+                followedId: req.params.followedId,
+                followerId: req.params.followerId
+            }
+        })
+        console.log(followerExist)
+        if (!followerExist) {
+            return res.status(400).json({ message: `Follower does not exist` })
+        }
+       
+        const follow = await Follow.destroy({
+            where: {
+                followedId: req.params.followedId,
+                followerId: req.params.followerId
+            }
+        })
+        
+        res.json(follow)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
 const postFollower = async (req, res) => {
     try {
         const followerExist = await Follow.findOne({
@@ -100,5 +125,6 @@ module.exports = {
     getFollowersById,
     getFollowsById,
     getFollowersByIdAndFollowedId,
-    postFollower
+    postFollower,
+    deleteFollower
 }

@@ -21,11 +21,11 @@ const followRoutes = require('./routes/follow.routes.js')
 const app = express()
 const PORT = 3000
 const cookieParser = require('cookie-parser')
-const originURL = '*'
+const originURL = 'http://localhost:5173'
 async function main() {
     app.use(express.json())
     app.use(cookieParser())
-    app.use(cors({ origin: originURL, credentials: true }))
+    app.use(cors({ origin: originURL, credentials: true,methods: ['GET', 'POST', 'PUT', 'DELETE'], allowedHeaders: ['Content-Type', 'Authorization']}))
     app.use(express.static('data'))
     app.use('/photos',express.static('photos'))
     app.use('/api', userRoutes)

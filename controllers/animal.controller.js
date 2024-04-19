@@ -105,9 +105,43 @@ const getAllDataByName = async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 }
+const getAllDataByLocation = async (req, res) => {
+    try {
+        const allData = await Animal.findAll({
+            where: { location_id: req.params.location_id },
+            include: [
+                {
+                    model: Location,
+                    where: { name: req.params.name },
+                    attributes: ['name', 'description']
+                },{
+                    model: Specie,
+                    attributes: ['name', 'description']
+                },
+                {
+                    model: Photo,
+                    attributes: ['id','url']
+                },
+                {
+                    model: Post,
+                    attributes: ['description','url','user_id']
+                }
+
+            ],
+            attributes: { exclude: ['specie_id'] }
+        })
+        if(!allData){
+            return res.status(404).json({ message: "Animal not found" })
+        }
+        res.json(allData)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
 
 module.exports = {
     getAllData,
     getAllDataById,
-    getAllDataByName
+    getAllDataByName,
+    getAllDataByLocation
 }

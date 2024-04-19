@@ -17,8 +17,10 @@ const login = async (req, res, Model) => {
             return res.status(404).json({ error: "Incorrect Password" })
         }
         const token = jwt.sign({ userId: user.id, username: user.username }, SECRET_KEY, { expiresIn: '2h' })
-        res.cookie('token', token, { httpOnly: false, maxAge: 7200000 })
-        return res.json({ message: 'Login Correcto' })
+        console.log(token)
+        // res.cookie('token', token, { httpOnly: false, maxAge: 7200000, path: '/' })
+        return  res.status(200).json(token)
+        // return res.json({ message: 'Login Correcto' })
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -31,7 +33,7 @@ const register = async (req, res, Model) => {
         }
         const existingUser = await Model.findOne({ where: { username } })
         if (existingUser) {
-            return res.status(400).json({ err: 'User exists' })
+            return res.status(400).json({ error: 'User exists' })
         }
         const passwordEncrypt = bcrypt.hashSync(password, 10)
         password = passwordEncrypt
@@ -42,13 +44,15 @@ const register = async (req, res, Model) => {
     }
 }
 const logout = async (req, res) => {
-    res.clearCookie('token')
+    res.clearCookie('tokenCookie')
     return res.json({ message: 'Logout' })
 }
 const checkCookie = async (req, res, Model) => {
-    const user = await Model.findOne(req.userId)
+    console.log('el req user id',req.userId)
+    const user = await Model.findByPk(req.userId)
     console.log(user)
     if (!user) {
+        console.log('User not found')
         return res.status(404).json({ error: 'User not found' })
     }
     return res.json({ id: user.id, username: user.username })
