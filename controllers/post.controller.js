@@ -19,7 +19,9 @@ const getAllData = async (req, res) => {
                     attributes:['name']   
                 }
             ],
-            attributes: { exclude: ['user_id', 'animal_id'] }
+            order: [['createdAt', 'DESC']],
+            attributes: { exclude: ['user_id', 'animal_id'],
+         }
         })
         if(!allData){
             return res.status(404).json({ message: "Post not found" })

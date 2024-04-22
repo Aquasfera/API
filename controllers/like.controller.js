@@ -90,7 +90,6 @@ const postLike = async (req, res) => {
             userId: req.body.userId,
             postId: req.body.postId
         })
-        console.log(like)
         res.json(like)
     } catch (error) {
         res.status(400).json({ error: error.message })

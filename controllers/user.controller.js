@@ -7,20 +7,15 @@ const login = async (req, res, Model) => {
     console.log( username, password)
     try {
         const user = await Model.findOne({ where: { username } })
-        console.log(user)
         if (!user) {
             return res.status(404).json({ error: "User not found" })
         }
         const passwordMatch = await bcrypt.compare(password, user.password)
-        console.log(passwordMatch)
         if (!passwordMatch) {
             return res.status(404).json({ error: "Incorrect Password" })
         }
         const token = jwt.sign({ userId: user.id, username: user.username }, SECRET_KEY, { expiresIn: '2h' })
-        console.log(token)
-        // res.cookie('token', token, { httpOnly: false, maxAge: 7200000, path: '/' })
         return  res.status(200).json(token)
-        // return res.json({ message: 'Login Correcto' })
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -44,19 +39,16 @@ const register = async (req, res, Model) => {
     }
 }
 const logout = async (req, res) => {
-    res.clearCookie('tokenCookie')
     return res.json({ message: 'Logout' })
 }
 const checkCookie = async (req, res, Model) => {
-    console.log('el req user id',req.userId)
     const user = await Model.findByPk(req.userId)
-    console.log(user)
     if (!user) {
-        console.log('User not found')
         return res.status(404).json({ error: 'User not found' })
     }
-    return res.json({ id: user.id, username: user.username })
+    return res.json({ id: user.id, username: user.username, avatar: user.avatar})
 }
+
 module.exports = {
     login,
     register,
