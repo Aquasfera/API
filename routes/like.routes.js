@@ -23,8 +23,8 @@ router.get('/like/post/:postId', async(req,res) => await getAllLikesByPostId(req
 router.get('/like/user/:userId', async(req,res) => await getAllLikesByUserId(req,res))
 router.get('/like/user/:userId/post/:postId', async(req,res) => await getAllLikesByUserIdAndPostId(req,res))
 router.get('/like/count/:postId', async(req,res) => await getCountFromLike(req,res))
-router.post('/like', async(req,res) => await postLike(req,res))
-router.put('/like/:id', async(req,res) => await updateItem(req,res,Like))
-router.delete('/like/user/:userId/post/:postId', async(req,res) => await deleteLike(req,res))
+router.post('/like', checkToken,async(req,res) => await postLike(req,res))
+router.put('/like/:id',checkToken, async(req,res) => await updateItem(req,res,Like))
+router.delete('/like/user/:userId/post/:postId',checkToken, async(req,res) => await deleteLike(req,res))
 
 module.exports = router

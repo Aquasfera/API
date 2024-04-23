@@ -20,7 +20,7 @@ router.get('/photo', async (req, res) => await readAllItems(req, res, Photo))
 router.get('/photo/:id', async (req, res) => await readItem(req, res, Photo))
 router.get('/photo/url/:name', async (req, res) => await getAllDataByURL(req, res, Photo))
 router.get('/photo/animal/:animal_id', async (req, res) => await getPhotoByAnimalID(req, res, Photo))
-router.post('/photo', [resize,checkToken], async (req, res) => {
+router.post('/photo', [resize, checkToken], async (req, res) => {
     req.body.url = req.file.filename
     // req.body.name = req.file.filename+ '.jpg'
     await createItem(req, res, Photo)

@@ -11,7 +11,7 @@ const {
 const checkToken = require('../middleware/token.js')
 
 router.get('/location', async(req,res) => await readAllItems(req,res,Location))
-router.get('/location/:id', async(req,res) => await readItem(req,res,Location))
+router.get('/location/:id',  async(req,res) => await readItem(req,res,Location))
 router.post('/location', checkToken, async(req,res) => await createItem(req,res,Location))
 router.put('/location/:id', checkToken, async(req,res) => await updateItem(req,res,Location))
 router.delete('/location/:id', checkToken, async(req,res) => await deleteItem(req,res,Location))

@@ -46,7 +46,7 @@ const deleteItem = async(req,res,Model) => {
             return res.status(404).json({error:  `${Model} not found`})
         }
         await item.destroy()
-        res.json({ message: Model + "updated succesfully"})
+        res.json({ message: Model + "delete succesfully"})
     }catch(error){
         res.status(404).json({error: error.message})
     }
