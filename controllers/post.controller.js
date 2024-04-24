@@ -99,7 +99,7 @@ const getPostByAnimal = async (req, res) => {
                 },
                 {
                     model:Location,
-                    attributes:['name']   
+                    attributes:['name',"description"]   
                 }
             ],
             attributes: { exclude: ['user_id', 'animal_id','updatedAt','createdAt'] }

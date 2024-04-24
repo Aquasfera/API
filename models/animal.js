@@ -10,9 +10,18 @@ const Animal = sequelize.define('animals', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    description: {
+    scientific_name: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    size: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING(1000),
+        allowNull: false,
+        
     }
 })
 
