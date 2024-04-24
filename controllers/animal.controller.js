@@ -108,11 +108,11 @@ const getAllDataByName = async (req, res) => {
 const getAllDataByLocation = async (req, res) => {
     try {
         const allData = await Animal.findAll({
-            where: { location_id: req.params.location_id },
+            
             include: [
                 {
                     model: Location,
-                    where: { name: req.params.name },
+                    where: { id: req.params.location_id },
                     attributes: ['name', 'description']
                 },{
                     model: Specie,
