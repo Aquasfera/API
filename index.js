@@ -29,7 +29,7 @@ async function main() {
     // app.use(cors({ origin: originURL, credentials: true,methods: ['GET', 'POST', 'PUT', 'DELETE'], allowedHeaders: ['Content-Type', 'Authorization']}))
 
     app.use(express.static('data'))
-    app.use('/photos',express.static('photos'))
+    app.use('/api/photos',express.static('photos'))
     app.use('/api', userRoutes)
     app.use('/api', postRoutes)
     app.use('/api', animalRoutes)
